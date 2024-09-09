@@ -1,0 +1,51 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@{
+    var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var siteName = settings?.Value<string>("siteName") ?? "";
+    var officeLocation = settings?.Value<string>("officeLocation") ?? "";
+
+    var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
+}
+
+
+<header>
+    <div class="header-top">
+        <div class="container">
+            <p>@officeLocation</p>
+            <div class="social-media">
+                <div class="vl"></div>
+                <a class="social" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                <div class="vl"></div>
+                <a class="social" href="#"><i class="fa-brands fa-twitter"></i></a>
+                <div class="vl"></div>
+                <a class="social" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                <div class="vl"></div>
+            </div>
+        </div>
+    </div>
+    <div class="header-menu">
+        <div class="container">
+            <a id="logo" href="home.html"><img src="@siteLogotype" alt="@siteName"></a>
+
+            <div id="menu">
+                <nav>
+                    <a class="menu-link" href="about.html">About</a>
+                    <a class="menu-link" href="services.html">Services</a>
+                    <a class="menu-link" href="projects.html">Projects</a>
+                    <a class="menu-link" href="contact.html">Contact</a>
+                </nav>
+            </div>
+
+            <div class="search-form">
+                <form>
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </form>
+            </div>
+            
+            <button class="btn-menu"><i class="fa-regular fa-bars"></i></button>
+        </div>
+    </div>
+</header>

@@ -1,8 +1,15 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
 @{
 	Layout = null;
-	var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.Title} | Onatrix - Financial Solutions" : $"Onatrix - Financial Solutions";
+
+	var rootContents = UmbracoHelper.ContentAtRoot();
+    var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
+    var siteName = settings?.Value<string>("siteName") ?? "Onatrix";
+	var siteTagline = settings?.Value<string>("siteTagline") ?? "Financial Solutions";
+
+	var pageTitle = !string.IsNullOrEmpty(ViewBag?.Title) ? $"{ViewBag?.Title} | {siteName} - {siteTagline}" : $"{siteName} - {siteTagline}";
 }
 
 <!DOCTYPE html>
@@ -16,11 +23,11 @@
 </head>
 <body>
 	<div class="wrapper">
-		<header></header>
+		@await Html.PartialAsync("partials/static/header.cshtml")
 		<main>
 			@RenderBody()
 		</main>
-		<footer></footer>
+		@await Html.PartialAsync("partials/static/footer.cshtml")
 	</div>
 	<script src="/scripts/main.js"></script>
 </body>
