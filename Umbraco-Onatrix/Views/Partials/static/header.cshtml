@@ -15,15 +15,7 @@
     <div class="header-top">
         <div class="container">
             <p>@officeLocation</p>
-            <div class="social-media">
-                <div class="vl"></div>
-                <a class="social" href="#"><i class="fa-brands fa-facebook-f"></i></a>
-                <div class="vl"></div>
-                <a class="social" href="#"><i class="fa-brands fa-twitter"></i></a>
-                <div class="vl"></div>
-                <a class="social" href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-                <div class="vl"></div>
-            </div>
+            @await Html.PartialAsync("socialmedia.cshtml")
         </div>
     </div>
     <div class="header-menu">
