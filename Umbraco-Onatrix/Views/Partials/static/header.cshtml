@@ -1,6 +1,13 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
 @{
     var rootContents = UmbracoHelper.ContentAtRoot();
     var settings = rootContents?.FirstOrDefault(x => x.ContentType.Alias == "settingsPage") ?? null;
@@ -8,6 +15,8 @@
     var officeLocation = settings?.Value<string>("officeLocation") ?? "";
 
     var siteLogotype = settings?.Value<IPublishedContent>("siteLogotype")?.Url() ?? "";
+
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
 }
 
 
@@ -20,14 +29,17 @@
     </div>
     <div class="header-menu">
         <div class="container">
-            <a id="logo" href="home.html"><img src="@siteLogotype" alt="@siteName"></a>
+            <a id="logo" href="/"><img src="@siteLogotype" alt="@siteName"></a>
 
             <div id="menu">
                 <nav>
-                    <a class="menu-link" href="about.html">About</a>
-                    <a class="menu-link" href="services.html">Services</a>
-                    <a class="menu-link" href="projects.html">Projects</a>
-                    <a class="menu-link" href="contact.html">Contact</a>
+                    @if (selection?.Length > 0)
+                    {
+                        @foreach (var item in selection)
+                        {
+                            <a class="@(item.IsAncestorOrSelf(Model) ? "nav-link active" : "nav-link")" href="@item.Url(PublishedUrlProvider)" title="@item.Name">@item.Name</a>
+                        }
+                    }
                 </nav>
             </div>
 
