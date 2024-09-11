@@ -47,6 +47,158 @@
 	}
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@media (prefers-reduced-motion: no-preference) {
+  :root {
+    scroll-behavior: smooth;
+  }
+}
+*, *::before, *::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html, body, section, div, header, footer, main, aside, nav, blockquote, p, span {
+  margin: 0;
+  padding: 0;
+}
+
+img, svg {
+  vertical-align: middle;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 16px;
+  color: #535565;
+}
+
+.wrapper {
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1200px;
+  }
+}
+
+.container-fluid {
+  position: relative;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  display: inline-block;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1em;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  margin: 0;
+  padding-top: 0rem;
+  padding-bottom: 1em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 70px;
+}
+
+h2 {
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 30px;
+}
+
+h4 {
+  font-size: 22px;
+}
+
+h5 {
+  font-size: 18px;
+}
+
+h6 {
+  font-size: 14px;
+}
+
+.btn-dark, .btn-primary, .btn-secondary, .btn-accent, .btn-gray, .btn-light {
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px;
+  border: 1px solid;
+  padding: 15px 40px;
+  font-size: 16px;
+  transition: 0.25s;
+  text-decoration: none !important;
+  background-color: transparent;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+.btn-dark:hover, .btn-primary:hover, .btn-secondary:hover, .btn-accent:hover, .btn-gray:hover, .btn-light:hover {
+  transition: 0.25s;
+  text-decoration: none;
+}
+
+.btn-menu {
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 50%;
+  border: 1px solid;
+  transition: 0.25s;
+  text-decoration: none !important;
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: transparent;
+  height: 55px;
+  width: 55px;
+  font-size: 1.6rem;
+}
+.btn-menu:hover {
+  transition: 0.25s;
+  text-decoration: none;
+}
+
 .header-top {
     background-color: #4F5955;
 }
@@ -54,35 +206,49 @@
 .header-top .container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .header-top .container p {
     color: #FFFFFF;
+    padding: 0px 0px 0px;
 }
 
-.header-top .container .social-media {
+.header-top .socialmedia {
     display: none;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
 
-@media (min-width: 1024px) {
-    .header-top .container .social-media {
+.header-top .socialmedia .vl {
+    border-left: 1px solid #606966;
+    height: 45px;
+}
+
+@media (min-width: 482px) {
+    .header-top .socialmedia {
         display: flex;
     }
 }
 
-.header-top .container .social-media .vl {
-    border-left: 1px solid #606966;
-    height: 100%;
-}
-
-.header-top .container .social-media .social {
+.header-top .socialmedia .social,
+.header-top .socialmedia .socialmedia-item {
     color: #FFFFFF;
-    transition: 0.25s ease-in-out;
+    transition: color 0.25s ease-in-out;
+    text-decoration: none;
 }
 
-.header-top .container .social-media .social:hover {
+.header-top .socialmedia .social:hover,
+.header-top .socialmedia .socialmedia-item:hover {
     color: #D9C3A9;
+}
+
+.header-menu {
+  background-color: #FFFFFF;
+}
+
+.header-menu .container {
+  display: flex;
+  justify-content: space-between;
 }

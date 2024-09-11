@@ -10,6 +10,7 @@
 @if(socialMediaPlatforms != null) 
 {
     <div class="socialmedia">
+        <div class="vl"></div>
         @foreach (var social in socialMediaPlatforms)
         {
             var platformName = social?.Content?.Value<string>("platformName");
@@ -18,14 +19,17 @@
             switch(platformName!.ToLower()) {
         case "facebook":
             <a class="social" href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"><i class="fa-brands fa-facebook-f"></i></a>
+            <div class="vl"></div>
             break;
 
         case "x(formerly twitter)":
             <a class="social" href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"><i class="fa-brands fa-twitter"></i></a>
+            <div class="vl"></div>
             break;
         
         case "linkedin":
             <a href="@platformAccountUrl" title="@platformAccountUrl" target="_blank" class="socialmedia-item"><i class="fa-brands fa-linkedin-in"></i></a>
+            <div class="vl"></div>
             break;
             }
         }
