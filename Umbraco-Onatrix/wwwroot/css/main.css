@@ -189,7 +189,8 @@ h6 {
   outline: none !important;
   -webkit-tap-highlight-color: transparent;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  background-color: transparent;
+  background-color: #4F5955;
+  color: #D9C3A9;
   height: 55px;
   width: 55px;
   font-size: 1.6rem;
@@ -197,6 +198,8 @@ h6 {
 .btn-menu:hover {
   transition: 0.25s;
   text-decoration: none;
+  background-color: #D9C3A9;
+  color: #4F5955;
 }
 
 .header-top {
@@ -251,4 +254,104 @@ h6 {
 .header-menu .container {
   display: flex;
   justify-content: space-between;
+}
+
+.header-menu {
+    background-color: #FFFFFF;
+}
+
+.header-menu .container {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "logo mobile";
+    gap: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#logo {
+    grid-area: logo;
+}
+
+#menu {
+    grid-area: menu;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+#menu nav {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-link {
+    font-weight: 700;
+    color: #4F5955;
+    transition: 0.25s ease-in-out;
+}
+
+.nav-link:hover {
+    color: #D9C3A9;
+    text-decoration: none;
+}
+
+.nav-link.active {
+    color: #D9C3A9;
+    text-decoration: none;
+}
+
+.search-form {
+    grid-area: search;
+    display: none;
+    gap: 15px;
+}
+
+.btn-menu {
+    grid-area: mobile;
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .header-menu .container {
+        grid-template-columns: auto 1fr auto;
+        grid-template-areas: "logo menu search";
+    }
+
+    #menu {
+        display: block;
+    }
+
+    #menu nav {
+        gap: 80px;
+    }
+
+    .search-form {
+        display: flex;
+    }
+
+    .btn-menu {
+        display: none;
+    }
+}
+
+footer {
+    background-color: #171717;
+}
+
+footer .container {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    color: #4F5955;
+    font-size: 14px;
+}
+
+footer .container span {
+    color: #D9C3A9;
 }
