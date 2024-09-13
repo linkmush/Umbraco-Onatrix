@@ -76,8 +76,9 @@ body {
 }
 
 .wrapper {
-  display: grid;
-  grid-template-rows: auto auto 1fr auto;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    height: 100vh;
 }
 
 .container {
@@ -128,7 +129,7 @@ p {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: "Poppins", sans-serif;
-  font-weight: 700;
+  font-weight: 700 !important;
   font-style: normal;
   margin-top: 0;
   margin-bottom: 0.5em;
@@ -178,6 +179,80 @@ h6 {
   text-decoration: none;
 }
 
+.btn-dark {
+    background-color: #171717;
+    color: #FFFFFF;
+    border: none;
+}
+
+.btn-dark:hover {
+    background-color: #F2EDDC;
+    color: #4F5955;
+}
+
+.btn-primary {
+    background-color: #4F5955;
+    color: #F2EDDC;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #F2EDDC;
+    color: #4F5955;
+}
+
+.btn-secondary {
+    background-color: #D9C3A9;
+    color: #4F5955;
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #F2EDDC;
+    color: #4F5955;
+}
+
+.btn-accent {
+    background-color: #F2EDDC;
+    color: #4F5955;
+    border: none;
+}
+
+.btn-accent:hover {
+    background-color: #4F5955;
+    color: #F2EDDC;
+}
+
+.btn-gray {
+    background-color: #F7F7F7;
+    color: #4F5955;
+    border: none;
+}
+
+.btn-gray:hover {
+    background-color: #F2EDDC;
+    color: #4F5955;
+}
+
+.btn-light {
+    background-color: #FFFFFF;
+    color: #4F5955;
+    border: none;
+}
+
+.btn-light:hover {
+    background-color: #F2EDDC;
+    color: #4F5955;
+}
+
+.btn-none {
+    background-color: transparent;
+    color: #171717;
+    border: 1px solid #171717; /* Exempelvis för en knapp utan fyllning */
+}
+
+
+
 .btn-menu {
   justify-content: center;
   align-items: center;
@@ -187,8 +262,6 @@ h6 {
   transition: 0.25s;
   text-decoration: none !important;
   outline: none !important;
-  -webkit-tap-highlight-color: transparent;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   background-color: #4F5955;
   color: #D9C3A9;
   height: 55px;
@@ -288,7 +361,6 @@ h6 {
     gap: 15px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
 }
 
 .nav-link {
@@ -316,6 +388,7 @@ h6 {
 .btn-menu {
     grid-area: mobile;
     display: block;
+    border: none;
 }
 
 @media (min-width: 992px) {
@@ -343,6 +416,7 @@ h6 {
 
 footer {
     background-color: #171717;
+    margin-top: auto;
 }
 
 footer .container {
@@ -354,4 +428,55 @@ footer .container {
 
 footer .container span {
     color: #D9C3A9;
+}
+
+#hero {
+    position: relative;
+}
+
+#hero .background-image {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    z-index: 0;
+    display: none;
+
+    @media (min-width: 768px) {
+        display: block;
+    }
+
+    @media (min-width: 1024px) {
+        object-fit: cover;
+        height: 552px;
+    }
+}
+
+#hero .umb-block-grid__layout-container {
+    position: relative;
+    z-index: 1;
+}
+
+#hero h1 {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+@media (min-width: 1024px) {
+    #hero h1 {
+        font-size: 70px;
+        margin-top: 95px;
+    }
+}
+
+#hero p {
+    color: #4F5955;
+    margin-top: 30px;
+}
+
+#about-us .umb-block-grid__layout-container {
+    margin-top: 150px;
+}
+
+#about-us h6 {
+  color: #D9C3A9;
 }
