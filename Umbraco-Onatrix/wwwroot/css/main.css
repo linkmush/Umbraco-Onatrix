@@ -248,7 +248,7 @@ h6 {
 .btn-none {
     background-color: transparent;
     color: #171717;
-    border: 1px solid #171717; /* Exempelvis för en knapp utan fyllning */
+    border: 1px solid #171717;
 }
 
 
