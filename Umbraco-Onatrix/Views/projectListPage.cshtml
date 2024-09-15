@@ -1,0 +1,37 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+	Layout = "mainLayout.cshtml";
+	ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+	var selection = Umbraco.Content(Guid.Parse("97c85f78-bedd-43ad-89fd-39e517e5addc"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible());
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Title)) 
+{
+    @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
+}
+
+<section id="projects">
+	<div class="container">
+		<div class="project-left">
+			@foreach (var item in selection) {
+				var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+				var preamble = item?.Value<string>("preamble") ?? "";
+				var creationDate = item.CreateDate.ToString("MMMM dd, yyyy");
+
+				<div class="project-thumbnail">
+					<img src="@image" alt="@item.Name">
+				</div>
+				<div class="project-content">
+					<h4>@item.Name</h4>
+					<p><i class="fa-solid fa-calendar-days"></i>@creationDate</p>
+					<p>@preamble</p>
+					<a href="@item.Url()">Read More<i class="fa-light fa-arrow-right"></i></a>
+				</div>
+			}
+		</div>
+	</div>
+</section>
