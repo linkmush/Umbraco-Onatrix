@@ -15,11 +15,7 @@
 	.Take(6);
 }
 
-<section id="our-services">
-	@if (!string.IsNullOrEmpty(backgroundColorClass))
-    {
-	<div class="background @backgroundColorClass"></div>
-    }
+<section id="our-services" class="@backgroundColorClass">
 	<div class="container">
 		<div class="headline">
 			<h6>@sectionTitle</h6>
