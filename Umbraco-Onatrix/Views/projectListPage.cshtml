@@ -7,6 +7,14 @@
 	var selection = Umbraco.Content(Guid.Parse("97c85f78-bedd-43ad-89fd-39e517e5addc"))
     .ChildrenOfType("projectItemTemplate")
     .Where(x => x.IsVisible());
+
+	var itemsPerPage = 4;
+
+	if (!int.TryParse(Context.Request.Query["page"], out int currentPage))
+		currentPage = 1;
+
+	var totalItems = selection?.Count() ?? 0;
+	var pagedItems = selection?.Skip((currentPage - 1 ) * itemsPerPage).Take(itemsPerPage);
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Title)) 
@@ -33,5 +41,37 @@
 				</div>
 			}
 		</div>
+
+				<section class="pagination">
+			<div class="container">
+
+				@if (currentPage > 1) 
+				{
+					<a href="?page=@(currentPage - 1)" class="change">PREV</a>
+				}
+				else 
+				{
+					<span class="change inactive">PREV</span>
+				}
+
+				<ul class="pages">
+					@for (int i = 1; i<= Math.Ceiling((decimal)totalItems / itemsPerPage); i++) 
+					{
+						<li class="@((i == currentPage) ? "number active" : "number")">
+							<a href="?page=@i">@i</a>
+						</li>
+					}
+				</ul>
+
+				@if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage)) 
+				{
+					<a class="change" href="?page=@(currentPage + 1)">NEXT</a>
+				}
+				else 
+				{
+					<span class="change inactive">NEXT</span>
+				}
+			</div>
+		</section>
 	</div>
 </section>

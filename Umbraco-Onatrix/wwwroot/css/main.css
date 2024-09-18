@@ -160,6 +160,34 @@ h6 {
   font-size: 14px;
 }
 
+.background-dark {
+    background-color: #171717;
+}
+
+.background-primary {
+    background-color: #4F5955;
+}
+
+.background.bg-secondary {
+    background-color: #171717;
+}
+
+.background-accent {
+    background-color: #F2EDDC;
+}
+
+.background-gray {
+    background-color: #F7F7F7;
+}
+
+.background-light {
+    background-color: #FFFFFF;
+}
+
+.background-none {
+    background-color: #FFFFFF;
+}
+
 .btn-dark, .btn-primary, .btn-secondary, .btn-accent, .btn-gray, .btn-light {
   display: inline-block;
   cursor: pointer;
@@ -441,7 +469,7 @@ footer .container span {
     z-index: 0;
     display: none;
 
-    @media (min-width: 768px) {
+    @media (min-width: 808px) {
         display: block;
     }
 
@@ -459,6 +487,9 @@ footer .container span {
 #hero h1 {
     font-size: 30px;
     margin-top: 20px;
+    max-width: 550px;
+    white-space: normal;
+    line-height: 1.1;
 }
 
 @media (min-width: 1024px) {
@@ -470,7 +501,13 @@ footer .container span {
 
 #hero p {
     color: #4F5955;
-    margin-top: 30px;
+    margin-top: 10px;
+    max-width: 500px;
+    white-space: normal;
+}
+
+#hero .btn-primary {
+  margin-top: 10px;
 }
 
 #about-us .umb-block-grid__layout-container {
