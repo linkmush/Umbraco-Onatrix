@@ -1,0 +1,64 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	var headline = Model?.Content.Value<string>("headline") ?? "";
+
+	var headlineContent = Model?.Content.Value<string>("headlineContentH6");
+
+	var preamble = Model?.Content.Value<string>("preamble") ?? "";
+
+	bool.TryParse(ViewData["error_name"]?.ToString()!, out bool error_name);
+
+	bool.TryParse(ViewData["error_email"]?.ToString()!, out bool error_email);
+
+	bool.TryParse(ViewData["error_phone"]?.ToString()!, out bool error_phone);
+}
+
+<div class="container" id="container-form">
+	<h6>@headlineContent</h6>
+	<h2>@headline</h2>
+	<p>@preamble</p>
+
+	<div class="container">
+
+		@if (TempData["success"] != null)
+		{
+			<div class="sucess-message">@TempData["success"]</div>
+		}
+		else
+		{
+			@using (Html.BeginUmbracoForm("HandleSubmit", "ContactSurface", FormMethod.Post))
+			{
+				<div class="form-input-group">
+					<input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@ViewData["name"]">
+						<span class="form-input-error @((error_name) ? "form-invalid-input" : null)">You must enter your name</span>
+				</div>
+
+				<div class="form-input-group">
+					<input id="email" name="email" type="email" placeholder="Email" class="form-input" value="@ViewData["email"]">
+					<span class="form-input-error @((error_email) ? "form-invalid-input" : null)">You must enter an valid e-mail address</span>
+				</div>
+
+				<div class="form-input-group">
+					<input id="phone" name="phone" type="tel" placeholder="Phone" class="form-input" value="@ViewData["phone"]">
+					<span class="form-input-error @((error_phone) ? "form-invalid-input" : null)">You must enter your phone number</span>
+				</div>
+
+				<div class="form-input-group">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Financial consulting
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+						<button class="dropdown-item" type="button">Action</button>
+						<button class="dropdown-item" type="button">Another action</button>
+						<button class="dropdown-item" type="button">Something else here</button>
+					</div>
+				</div>
+
+				<button type="submit" class="form-button btn-accent">Submit</button>
+			}
+		}
+
+	</div>
+</div>

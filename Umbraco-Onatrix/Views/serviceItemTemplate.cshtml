@@ -3,6 +3,9 @@
 @{
 	Layout = "mainLayout.cshtml";
 	ViewBag.Title = Model?.Value("pageTitle") ?? null;
+
+	var preamble = Model?.Value<string>("preamble") ?? "";
+	var image = Model?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
 }
 
 @if (!string.IsNullOrEmpty(ViewBag.Title)) 
@@ -12,6 +15,11 @@
 
 <section class="service-details">
 	<div class="container">
+		<div class="left-side">
+			<h6>About us</h6>
+			<img src="@image" alt="@Model?.Name">
+			<p>@preamble</p>
+		</div>
 		@Model.Value("pageContent")
 	</div>	
 </section>
