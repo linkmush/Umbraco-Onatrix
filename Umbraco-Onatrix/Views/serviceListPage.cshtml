@@ -65,14 +65,14 @@
 					<span class="change inactive">PREV</span>
 				}
 
-				<ul class="pages">
+				<div class="pages">
 					@for (int i = 1; i<= Math.Ceiling((decimal)totalItems / itemsPerPage); i++) 
 					{
 						<li class="@((i == currentPage) ? "number active" : "number")">
 							<a href="?page=@i">@i</a>
 						</li>
 					}
-				</ul>
+				</div>
 
 				@if (currentPage < Math.Ceiling((decimal)totalItems / itemsPerPage)) 
 				{
