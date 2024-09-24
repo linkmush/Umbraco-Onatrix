@@ -10,21 +10,25 @@
     var isFirstItem = true;
 }
 
-<section class="about-hero">
+<section class="page-title">
+    <img class="img-2" src="/media/bqlflgml/breadcrumb-2.svg" alt="">
+    <img class="img-1" src="/media/aosjyc5p/breadcrumb-1.svg" alt="">
     <div class="container">
-        <h1>@ViewBag.Title</h1>
-        
+        <h1 class="title">@ViewBag.Title</h1>
+
         @if (selection?.Length > 0)
         {
-        <ul class="breadcrumb">
-            @foreach (var item in selection.OrderBy(x => x.Level))
-            {
-                var displayName = isFirstItem ? homePageDisplayName : item.Name;
-                <li><a href="@item.Url(PublishedUrlProvider)">@item.Name</a> <span class="divider"><i class="fa-sharp fa-solid fa-chevron-right"></i></span></li>
-                isFirstItem = false;
-            }
-            <li class="active">@Model.Name</li>
-        </ul>
+            <ul class="breadcrumb">
+                @foreach (var item in selection.OrderBy(x => x.Level))
+                {
+                    var displayName = isFirstItem ? homePageDisplayName : item.Name;
+                    <li><a class="breadcrumb-home" href="@item.Url(PublishedUrlProvider)">@displayName</a></li>
+                    isFirstItem = false;
+                    <i class="fa-sharp fa-solid fa-chevron-right"></i>
+                }
+
+                <li class="active">@Model.Name</li>
+            </ul>
         }
     </div>
 </section>

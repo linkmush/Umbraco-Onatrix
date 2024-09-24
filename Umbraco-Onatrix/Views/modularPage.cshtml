@@ -12,3 +12,8 @@
 }
 
 @await Html.GetBlockGridHtmlAsync(Model.Layout)
+
+@if (!string.IsNullOrEmpty(ViewBag.Title))
+{
+    @await Html.PartialAsync("partials/static/contactInfo.cshtml")
+}

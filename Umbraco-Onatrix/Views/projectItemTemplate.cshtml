@@ -15,3 +15,8 @@
 		@Model.Value("pageContent")
 	</div>
 </section>
+
+@if (!string.IsNullOrEmpty(ViewBag.Title))
+{
+    @await Html.PartialAsync("partials/static/contactInfo.cshtml")
+}
