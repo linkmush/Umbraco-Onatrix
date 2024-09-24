@@ -1,0 +1,31 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	bool.TryParse(ViewData["support_error_email"]?.ToString()!, out bool error_email);
+}
+
+<div class="container" id="support-form">
+	<img src="/media/hnajvqck/service-risk-management-letter.svg" alt="background letter" class="form-background-image" />
+	<h5>How can we help you?</h5>
+	<p>online support 24/7, we are here to help you</p>
+
+	<div class="container-support">
+
+		@if (TempData["support_success"] != null)
+		{
+			<div class="sucess-message">@TempData["support_success"]</div>
+		}
+		else
+		{
+			@using (Html.BeginUmbracoForm("SupportSubmit", "SupportSurface", FormMethod.Post))
+			{
+				<div class="form-input-group">
+					<input id="email" name="email" type="email" placeholder="E-mail address" class="form-input" value="@ViewData["email"]">
+					<button type="submit" class="form-button btn-accent"><i class="fa-regular fa-envelope"></i></button>
+					<span class="form-input-error @((error_email) ? "form-invalid-input" : null)">You must enter an valid e-mail address</span>
+				</div>
+			}
+		}
+
+	</div>
+</div>

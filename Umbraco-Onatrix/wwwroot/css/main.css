@@ -1102,3 +1102,182 @@ span.form-input-error.form-invalid-input {
     height: 52px;
     color: #9C9EA6;
 }
+
+.service-details .container {
+	display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 770px) {
+    .service-details .container {
+	display: flex;
+    flex-direction: row;
+    }
+}
+
+.service-details .left-side {
+	width: auto;
+	padding: 30px 30px;
+}
+
+@media (min-width: 770px) {
+    .service-details .left-side {
+        width: 350px;
+        padding: 0 20px;
+        border-right: 2px solid rgba(75, 82, 100, 0.5);
+    }
+}
+
+.service-details .left-side img {
+    padding-top: 10px;
+	width: 100%;
+}
+
+.service-details .left-side p {
+	padding-top: 15px;
+}
+
+.service-details #support-form {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background-color: #4F5955;
+    padding: 30px;
+    border-radius: 3px;
+    margin-top: 30px;
+}
+
+.service-details h5 {
+    color: #F2EDDC;
+    font-size: 22px;
+}
+
+.service-details #support-form p {
+    color: #FFFFFF;
+    z-index: 1;
+}
+
+.service-details .container-support {
+    z-index: 1;
+}
+
+.service-details #support-form .form-background-image {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #4F5955;
+    z-index: 0;
+    height: 120px;
+    width: 160px;
+}
+
+.service-details #support-form .form-input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.service-details #support-form .form-input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 3px;
+    border: 1px solid #ebebeb;
+}
+
+.service-details #support-form .form-button {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+
+.service-details #support-form .form-button i {
+    font-size: 1.2em;
+    color: inherit;
+}
+
+.service-details #support-form .form-input-error {
+    position: absolute;
+    left: 0;
+    top: 100%;
+}
+
+.service-details #support-form .sucess-message {
+    color: #F2EDDC;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.service-details .right-side {
+	flex: 1;
+	padding: 0 30px;
+}
+
+.service-details .right-side p img {
+    width: 100%;
+    height: auto;
+}
+
+.service-details .right-side p {
+    font-size: 16px;
+}
+
+.service-details .right-side ul li::marker {
+    color: #D9C3A9;
+}
+
+.service-details .right-side ul li {
+    font-size: 14px;
+}
+
+.service-details .right-side h3 {
+    color: #4F5955;
+}
+
+.question-form h3 {
+    margin-top: 50px;
+}
+
+.question-form .form-labels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.question-form .form-input {
+    width: 100%;
+    height: 52px;
+    padding: 15px;
+    border: 1px solid #EBEBEB;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.question-form #message {
+    width: 100%;
+    height: 175px;
+    padding: 15px;
+    border: 1px solid #EBEBEB;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.question-form .btn-primary {
+    width: 140px;
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.question-form .sucess-message {
+    color: #4F5955;
+    font-weight: bold;
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 30px;
+}

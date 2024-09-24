@@ -1,0 +1,36 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+	bool.TryParse(ViewData["question_error_name"]?.ToString()!, out bool error_name);
+	bool.TryParse(ViewData["question_error_email"]?.ToString()!, out bool error_email);
+	bool.TryParse(ViewData["question_error_message"]?.ToString()!, out bool error_message);
+}
+
+<div class="container" id="question-form">
+	<h3>Have a question ?</h3>
+	@if (TempData["question_success"] != null)
+	{
+		<div class="sucess-message">@TempData["question_success"]</div>
+	}
+	else
+	{
+		@using (Html.BeginUmbracoForm("QuestionSubmit", "QuestionSurface", FormMethod.Post))
+		{
+			<div class="form-labels">
+				<div class="form-input-group">
+					<input id="name" name="name" type="text" placeholder="Name" class="form-input" value="@ViewData["name"]">
+					<span class="form-input-error @((error_name) ? "form-invalid-input" : null)">You must enter a name</span>
+				</div>
+				<div class="form-input-group">
+					<input id="email" name="email" type="email" placeholder="E-mail" class="form-input" value="@ViewData["email"]">
+					<span class="form-input-error @((error_email) ? "form-invalid-input" : null)">You must enter an valid e-mail address</span>
+				</div>
+			</div>
+			<div class="form-input-text">
+				<textarea id="message" name="message" placeholder="Question" class="form-textarea" value="@ViewData["email"]"></textarea>
+				<span class="form-input-error @((error_message) ? "form-invalid-input" : null)">You must enter your question</span>
+			</div>
+			<button type="submit" class="form-button btn-primary">Submit</button>
+		}
+	}
+</div>

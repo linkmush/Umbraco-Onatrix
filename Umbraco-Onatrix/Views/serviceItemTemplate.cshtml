@@ -16,10 +16,17 @@
 <section class="service-details">
 	<div class="container">
 		<div class="left-side">
-			<h6>About us</h6>
+			<h4>About us</h4>
 			<img src="@image" alt="@Model?.Name">
 			<p>@preamble</p>
+			@await Html.PartialAsync("partials/static/supportform.cshtml")
 		</div>
-		@Model.Value("pageContent")
-	</div>	
+		<div class="right-side">
+			@Model.Value("pageContent")
+		</div>
+	</div>
+</section>
+
+<section class="question-form">
+	@await Html.PartialAsync("partials/static/questionForm.cshtml")
 </section>
