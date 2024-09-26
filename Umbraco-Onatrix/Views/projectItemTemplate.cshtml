@@ -1,22 +1,69 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "mainLayout.cshtml";
-	ViewBag.Title = Model?.Value("pageTitle") ?? null;
+    Layout = "mainLayout.cshtml";
+    ViewBag.Title = Model?.Value("pageTitle") ?? null;
+ 
+    var parentPage = Model.Parent;
+    var projectTags = parentPage?.Value<string[]>("projectTags");
+   
+    var selection = Umbraco.Content(Guid.Parse("97c85f78-bedd-43ad-89fd-39e517e5addc"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible())
+    .Take(4);
 }
-
-@if (!string.IsNullOrEmpty(ViewBag.Title)) 
+ 
+@if (!string.IsNullOrEmpty(ViewBag.Title))
 {
     @await Html.PartialAsync("partials/static/breadcrumb.cshtml")
 }
-
+ 
 <section class="project-details">
-	<div class="container">
-		@Model.Value("pageContent")
-	</div>
+    <div class="container">
+        <div class="project-details-left">
+            <div class="content">
+                @Model.Value("pageContent")
+            </div>
+        </div>
+        <div class="project-details-right">
+            <div class="recent-projects">
+                <h2>Recent Projects</h2>
+                @if (selection != null)
+                {
+                    @foreach (var item in selection)
+                    {
+                        var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+                        var date = item?.Value<string>("dateUploaded") ?? "";
+ 
+                        <a class="projects-small" href="@item!.Url()">
+                            <img src="@image" alt="@item!.Name()">
+                            <div class="content">
+                                <h6>@item!.Name()</h6>
+                                <p class="date"><i class="fa-solid fa-calendar-days"></i>@date</p>
+                            </div>          
+                        </a>
+                    }
+                }
+            </div>
+            <div class="projects-tags">
+                <h2>Tags</h2>
+                @if (projectTags != null && projectTags.Length > 0)
+                {
+                    <div class="projects-tags">
+                    @foreach (var tag in projectTags)
+                    {
+                        <span class="tag">@tag</span>
+                    }
+                    </div>
+                }
+                else
+                {
+                    <p>No tags available.</p>
+                }
+            </div>
+            @await Html.PartialAsync("partials/static/supportform.cshtml")
+        </div>
+    </div>
 </section>
-
-@if (!string.IsNullOrEmpty(ViewBag.Title))
-{
-    @await Html.PartialAsync("partials/static/contactInfo.cshtml")
-}
+ 
+@await Html.PartialAsync("partials/static/contactInfo.cshtml")

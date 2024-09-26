@@ -1,0 +1,42 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.PropertyEditors.ValueConverters;
+@{
+    var sectionTitle = Model?.Content.Value<string>("sectionTitle") ?? "";
+    var headline = Model?.Content.Value<string>("headline") ?? "";
+
+	var selection = Umbraco.Content(Guid.Parse("97c85f78-bedd-43ad-89fd-39e517e5addc"))
+    .ChildrenOfType("projectItemTemplate")
+    .Where(x => x.IsVisible())
+    .Take(4);
+}
+
+<section id="recent-projects">
+    <div class="container">
+        <div class="project-header">
+            <h6>@sectionTitle</h6>
+            <h2 class="title">@headline</h2>
+        </div>
+    </div>
+    <div class="project-grid-boxes">
+        @if (selection != null) 
+        {
+            @foreach (var item in selection) 
+            {
+                var image = item?.Value<IPublishedContent>("thumbnailImage")?.Url() ?? "";
+
+                <a href="@item!.Url()">
+                    <div class="project-boxes">
+                        <img src="@image" alt="@item!.Name()">
+                        <div class="project-box-text">
+                            <p class="box-header">@item!.Name()</p>
+                            <p class="box-text">Financial Services</p>
+                            <i class="fa-solid fa-angle-right"></i>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+        </div>
+</section>

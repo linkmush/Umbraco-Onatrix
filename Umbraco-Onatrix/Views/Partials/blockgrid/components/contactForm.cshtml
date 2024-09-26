@@ -16,7 +16,10 @@
 }
 
 <div class="container" id="container-form">
-	<h6>@headlineContent</h6>
+	@if (!string.IsNullOrEmpty(headlineContent))
+	{
+		<h6>@headlineContent</h6>
+	}
 	<h2>@headline</h2>
 	<p>@preamble</p>
 
@@ -44,16 +47,14 @@
 					<input id="phone" name="phone" type="tel" placeholder="Phone" class="form-input" value="@ViewData["phone"]">
 					<span class="form-input-error @((error_phone) ? "form-invalid-input" : null)">You must enter your phone number</span>
 				</div>
-
+				
 				<div class="form-input-group">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						Financial consulting
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-						<button class="dropdown-item" type="button">Action</button>
-						<button class="dropdown-item" type="button">Another action</button>
-						<button class="dropdown-item" type="button">Something else here</button>
-					</div>
+					<select class="form-select dropdown-toggle" id="dropdownMenu2" aria-label="Default select example">
+                        <option selected>Financial consulting</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
 				</div>
 
 				<button type="submit" class="form-button btn-accent">Submit</button>
