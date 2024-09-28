@@ -7,13 +7,18 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco_Onatrix.Models;
+using Umbraco.Cms.Infrastructure.Scoping;
+using System.Diagnostics;
 
 namespace Umbraco_Onatrix.Controllers
 {
 	public class QuestionSurfaceController : SurfaceController
 	{
-		public QuestionSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
+		private readonly IScopeProvider _scopeProvider;
+
+		public QuestionSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IScopeProvider scopeProvider, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 		{
+			_scopeProvider = scopeProvider;
 		}
 
 		public IActionResult QuestionSubmit(QuestionFormModel form)
@@ -29,6 +34,31 @@ namespace Umbraco_Onatrix.Controllers
 				ViewData["question_error_message"] = string.IsNullOrEmpty(form.Message);
 
 				return CurrentUmbracoPage();
+			}
+
+			try
+			{
+				using (var scope = _scopeProvider.CreateScope())
+				{
+					var db = scope.Database;
+
+					var sql = "INSERT INTO QuestionForm (Name, Email, Message) VALUES (@Name, @Email, @Message)";
+
+					var parameters = new
+					{
+						Name = form.Name,
+						Email = form.Email,
+						Message = form.Message
+					};
+
+					db.Execute(sql, parameters);
+
+					scope.Complete();
+				}
+			}
+			catch (Exception ex)
+			{
+				Debug.WriteLine(ex.Message);
 			}
 
 			TempData["question_success"] = "form submitted sucessfully";

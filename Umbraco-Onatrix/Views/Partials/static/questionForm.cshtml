@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="form-input-text">
-				<textarea id="message" name="message" placeholder="Question" class="form-textarea" value="@ViewData["email"]"></textarea>
+				<textarea id="message" name="message" placeholder="Question" class="form-textarea">@ViewData["message"]</textarea>
 				<span class="form-input-error @((error_message) ? "form-invalid-input" : null)">You must enter your question</span>
 			</div>
 			<button type="submit" class="form-button btn-primary">Submit</button>
