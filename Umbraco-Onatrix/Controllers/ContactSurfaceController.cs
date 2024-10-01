@@ -9,20 +9,24 @@ using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Web.Website.Controllers;
 using Umbraco_Onatrix.Models;
 using System.Diagnostics;
+using Umbraco_Onatrix.Services;
+using Umbraco_Onatrix.dto;
 
 namespace Umbraco_Onatrix.Controllers
 {
 	public class ContactSurfaceController : SurfaceController
 	{
 		private readonly IScopeProvider _scopeProvider;
+		private readonly EmailService _emailService;
 
-		public ContactSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IScopeProvider scopeProvider , IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
+		public ContactSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IScopeProvider scopeProvider , EmailService emailService, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 		{
 			_scopeProvider = scopeProvider;
+			_emailService = emailService;
 		}
 
 		[HttpPost]
-		public IActionResult HandleSubmit(ContactFormModel form)
+		public async Task<IActionResult> HandleSubmit(ContactFormModel form, EmailDto dto)
 		{
 			if (!ModelState.IsValid) 
 			{
@@ -57,6 +61,8 @@ namespace Umbraco_Onatrix.Controllers
 
 					scope.Complete();
 				}
+
+				await _emailService.SendDataToAzureFunction(dto);
 			}
 			catch (Exception ex) 
 			{

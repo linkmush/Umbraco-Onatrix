@@ -8,19 +8,23 @@ using Umbraco.Cms.Core.Web;
 using Umbraco.Cms.Infrastructure.Persistence;
 using Umbraco.Cms.Infrastructure.Scoping;
 using Umbraco.Cms.Web.Website.Controllers;
+using Umbraco_Onatrix.dto;
 using Umbraco_Onatrix.Models;
+using Umbraco_Onatrix.Services;
 
 namespace Umbraco_Onatrix.Controllers
 {
 	public class SupportSurfaceController : SurfaceController
 	{
 		private readonly IScopeProvider _scopeProvider;
-		public SupportSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, IScopeProvider scopeProvider, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
+		private readonly EmailService _emailService;
+		public SupportSurfaceController(IUmbracoContextAccessor umbracoContextAccessor, EmailService emailService, IScopeProvider scopeProvider, IUmbracoDatabaseFactory databaseFactory, ServiceContext services, AppCaches appCaches, IProfilingLogger profilingLogger, IPublishedUrlProvider publishedUrlProvider) : base(umbracoContextAccessor, databaseFactory, services, appCaches, profilingLogger, publishedUrlProvider)
 		{
 			_scopeProvider = scopeProvider;
+			_emailService = emailService;
 		}
 
-		public IActionResult SupportSubmit(SupportFormModel form)
+		public async Task<IActionResult> SupportSubmit(SupportFormModel form, EmailDto dto)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -48,6 +52,8 @@ namespace Umbraco_Onatrix.Controllers
 
 					scope.Complete();
 				}
+
+				await _emailService.SendDataToAzureFunction(dto);
 			}
 			catch (Exception ex)
 			{

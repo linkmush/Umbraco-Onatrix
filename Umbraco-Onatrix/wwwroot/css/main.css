@@ -680,7 +680,7 @@ footer .container span {
     }
 }
 
-#about-us #container-form {
+/*#about-us #container-form {
     padding: 20px;
     background-color: #D9C3A9;
     height: auto;
@@ -714,11 +714,42 @@ footer .container span {
     #about-us #container-form {
     margin-top: 10px;
     }
+}*/
+
+#about-us #container-form {
+    padding: 20px;
+    background-color: #D9C3A9;
+    height: auto !important;
+    min-height: 500px !important;
+    width: 100% !important;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: linear-gradient(to bottom, #4F5955 21%, #FFFFFF 21%);
+    transition: box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+#about-us #container-form:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+@media (min-width: 1400px) {
+    #about-us #container-form {
+        margin: -170px 0 0 0 !important;
+        max-width: 500px;
+    }
 }
 
 #about-us #container-form h2 {
     padding: 15px;
     color: #F2EDDC;
+    font-size: 30px;
+}
+
+@media (min-width: 474px) {
+    #about-us #container-form h2 {
+        font-size: 40px;
+    }
 }
 
 #about-us #container-form p {
