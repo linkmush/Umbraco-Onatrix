@@ -27,7 +27,7 @@
             @await Html.PartialAsync("socialmedia.cshtml")
         </div>
     </div>
-    <div class="header-menu">
+@*     <div class="header-menu">
         <div class="container">
             <a id="logo" href="/"><img src="@siteLogotype" alt="@siteName"></a>
 
@@ -50,6 +50,31 @@
             </div>
             
             <button class="btn-menu"><i class="fa-regular fa-bars"></i></button>
+        </div>
+    </div> *@
+    <div class="header-menu">
+        <div class="container nav-container">
+            <a id="logo" class="logo" href="/"><img src="@siteLogotype" alt="@siteName"></a>
+
+            <nav class="nav-menu" id="menu">
+                <ul class="nav-ul">
+                    @if (selection?.Length > 0)
+                    {
+                        @foreach (var item in selection)
+                        {
+                            <li class="nav-li">
+                                <a class="@(item.IsAncestorOrSelf(Model) ? "nav-link active" : "nav-link")" href="@item.Url(PublishedUrlProvider)" title="@item.Name">@item.Name</a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </nav>
+            <div class="menu-right">
+                <div class="search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <button id="btn-menu" class="btn-menu" aria-label="Open menu"><i class="fa-regular fa-bars"></i></button>
+            </div>
         </div>
     </div>
 </header>

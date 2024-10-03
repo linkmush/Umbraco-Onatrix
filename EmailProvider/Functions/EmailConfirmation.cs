@@ -33,10 +33,10 @@ public class EmailConfirmation(EmailClient emailClient)
 				<html>
 					<body>
 						<h1>Thank you for contacting us!</h1>
-						<p>We have receivd your request and will contact you shortly</p>
+						<p>We have received your request and will contact you shortly.</p>
 						<p>Best Regards,<br>Onatrix</p>
 						<footer>
-							<p>This is an automatic generetad message, please do not responde to this message.</p>
+							<p>This is an automatically generated message. Please do not reply to this message.</p>
 						</footer>
 					</body>
 				</html>",
